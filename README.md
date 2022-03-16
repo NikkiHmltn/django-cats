@@ -121,4 +121,41 @@ class Home(View):
 ```
 > If you aren't seeing your css or js working as expected, check your `<project-app-name>/settings.py`, scroll near the bottom, and make sure your static url field looks like this: `STATIC_URL = '/static/'`
 
+# Rendering Data in a Template
 
+- First let's create a class to be our "fakabase". In this example I'm going to add a list of cats to my `main_app/views.py`
+- For reference, here's my code used: 
+```
+class Cat:
+    def __init__(self, name, age, gender):
+        self.name = name
+        self.age = age
+        self.gender = gender
+
+cats = [
+    Cat("Mau", 5, "Female"),
+    Cat("Garfield", 43, "Male"),
+    Cat("Meowth", 25, "Male"),
+    Cat("Salem", 500, "Male"),
+]
+```
+- Now display a class view (with a template_name like the other classes above) to render out your data using a built in method called `get_context_data` in the same file. This will help us add any extra information/data into the template. Here's my code looking inside of my class 'CatList' for that list I called 'cats' on my views.py page:
+```
+def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    # this line is setting the cats list to the sort of 'variable' called cats that I can now use in my template_name
+    context["cats"] = cats
+    return context
+```
+- We can now use our context in your rendered out template_name like so:
+
+```
+    <div>
+        {% for cat in cats %}
+            <h2>{{cat.name}}</h2>
+        {% endfor %}
+    </div>
+```
+> Be sure to make sure you are calling the appropriate variables/names/templates that fit *your* Django app!
+
+## That's a basic set up with views and templates! 
