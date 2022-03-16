@@ -81,4 +81,44 @@ class Home(View):
 - First, create a directory called `templates` inside of our `main_app` with `mkdir main_app/templates`.
 - We want to render out a template that is an HTML file, so let's practice with a `home.html` so let's make that file inside of our `templates` folder we just made.
 - Add a standard boilerplate and add any info you want to display inside of your home file.
+- Once you have your html file, don't forget to change the app's views to import `from django.views.generic.base import TemplateView` as well as re-define your class to ensure it's a TemplateView and not a standard View. My code looks like this: 
+```
+    class Home(TemplateView):
+    template_name = "home.html"
+```
+
+# Adding Template Inheritance
+- Instead of making a ton of boilerplates, lets just make one to extend from. Create a file in your templates called `base.html` where we will put our standard html boilerplate. Think of Template Inheritance sort of like EJS Partials!
+- In order to add any content to our base.html we need to define where our block of code can go. You can do this for titles, footers, headers, body, whatever! Add the code to base.html's body tags like so: 
+```
+    <body>
+    {% block content %}  
+
+    {% endblock %}
+    </body>
+```
+- Now wherever we need to render out anything in a body of any html page all we need inside of the file is: 
+```
+    {% extends 'base.html' %}
+    {% block content %}
+        <h1>THIS IS WHERE ALL YOUR HTML GOES</h1>
+        <p>Just throw all your html for the page between the blocks!</p>
+    {% endblock %}
+```
+
+# Adding Static Files to Django
+
+- In order to render out any static files like assets, css, js, etc., we must add a static folder in our main app. `mkdir main_app/static` 
+- Then we can add the folders we need for our files like scripts or styles like so with `mkdir main_app/static/scripts main_app/static/styles`
+- Don't forget to actually add the files inside the appropriate folder (*e.g. styles/styles.css or scripts/app.js*)
+- Add whatever content you want to your static files
+- In order to render our static folder, at the top of our `base.html` file we need to add `{% load static %}`. Simple as that!
+- We still need to link our files into our headers inside of our base template, here's an example of how to do so: 
+```
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
+    <script src="{% static 'scripts/app.js' %}" defer></script>
+
+```
+> If you aren't seeing your css or js working as expected, check your `<project-app-name>/settings.py`, scroll near the bottom, and make sure your static url field looks like this: `STATIC_URL = '/static/'`
+
 
