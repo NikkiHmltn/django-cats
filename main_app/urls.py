@@ -5,6 +5,9 @@ from . import views
 urlpatterns = [
     path('', views.Home.as_view(), name="home"),
     path('cats/', views.CatList.as_view(), name="cat-list"),
-    #important note: the "/" comes AFTER the url param you want
-    path('about/', views.About.as_view(), name="about")
+    path('about/', views.About.as_view(), name="about"),
+    path('cats/new/', views.CatCreate.as_view(), name="cat_create"),
+    path('cats/<int:pk>/', views.CatDetail.as_view(), name="cat_detail"),
+    path('cats/<int:pk>/update', views.CatUpdate.as_view(), name="cat_update"),
+    path('cats/<int:pk>delete', views.CatDelete.as_view(), name="cat_delete")
 ]

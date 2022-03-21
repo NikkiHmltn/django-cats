@@ -1,0 +1,12 @@
+{% extends 'base.html' %} 
+{% block content %}
+    <h1>Add a Cat</h1>
+    <form method="post">
+        <!-- Security Feature  -->
+        {% csrf_token %} 
+        <!--  Generate inputs wrapped in p tags! -->
+        {{form.as_p}} 
+        <!--  Submit form  -->
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

@@ -1,6 +1,6 @@
 # Starting Up a New Django Project with Pipenv
-- Run `pipenv install django` (Note: if you get the 'command not found: pipenv' error, try to uninstall and reinstall pipenv!)
-- After that, open up the virtual environment with `pipenv shell`
+- Open up the virtual environment with `pipenv shell`
+- Run `pipenv install django` (Note: if you get the 'command not found: pipenv' error, try to uninstall and reinstall pipenv! Do this is you haven't installed Django globally)
 - `django-admin startproject <app-name-here> .` Don't forget the `.` it's very important for your file structure!
 - Now we can start up our server to make sure it can run with `python3 manage.py runserver`. Assuming all is working, we should see our rocket ship! 
 ![django rocket ship](/images/rocketship.png)
